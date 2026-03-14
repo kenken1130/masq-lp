@@ -4,24 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MASQ — Anonymous 18+ Creator Platform</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:#000;--surface:#0A0A0A;--card:#111;--pink:#FF1B6B;--violet:#A855F7;
-  --text:#fff;--muted:#888;--gradient:linear-gradient(135deg,#FF1B6B,#A855F7);
-}
+:root{--bg:#000;--surface:#0A0A0A;--card:#111;--pink:#FF1B6B;--violet:#A855F7;--text:#fff;--muted:#888;--gradient:linear-gradient(135deg,#FF1B6B,#A855F7)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+body{font-family:'DM Sans','Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
 
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(20px);background:rgba(0,0,0,0.75);border-bottom:1px solid rgba(255,255,255,0.05)}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.nav-right{display:flex;align-items:center;gap:20px}
+.nav-right{display:flex;align-items:center;gap:16px}
 .nav-right a{color:var(--muted);text-decoration:none;font-size:0.85rem;transition:color 0.3s}
 .nav-right a:hover{color:#fff}
 .nav-btn{padding:8px 20px;background:var(--gradient);color:#fff;border:none;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:600;cursor:pointer;text-decoration:none}
 
-/* HERO */
+/* LANG SWITCHER */
+.lang-switch{display:flex;background:rgba(255,255,255,0.08);border-radius:100px;overflow:hidden;border:1px solid rgba(255,255,255,0.1)}
+.lang-btn{padding:5px 12px;font-size:0.7rem;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;transition:all 0.3s}
+.lang-btn.active{background:var(--gradient);color:#fff}
+
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 24px 40px;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background:url('hero_blur.jpg') center/cover no-repeat;opacity:0.35}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 40%,rgba(0,0,0,0.85) 100%)}
@@ -37,13 +38,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);ove
 .btn-ghost{padding:16px 36px;background:transparent;color:#fff;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500;border:1px solid rgba(255,255,255,0.15);border-radius:100px;cursor:pointer;text-decoration:none;transition:all 0.3s}
 .btn-ghost:hover{border-color:var(--violet)}
 
-/* PHONE */
 .phone-wrapper{display:flex;justify-content:center;perspective:1000px}
 .phone{width:280px;height:580px;background:#000;border-radius:36px;border:3px solid #222;position:relative;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,0.8),0 0 80px rgba(255,27,107,0.12);transform:rotateY(-5deg) rotateX(2deg);transition:transform 0.5s}
 .phone:hover{transform:rotateY(0) rotateX(0)}
 .phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:28px;background:#000;border-radius:0 0 16px 16px;z-index:10}
 .phone-screen{width:100%;height:100%;position:relative;overflow:hidden}
-
 .feed-card{position:absolute;inset:0;opacity:0;animation:feedCycle 12s ease infinite}
 .feed-card:nth-child(1){animation-delay:0s}
 .feed-card:nth-child(2){animation-delay:4s}
@@ -51,29 +50,29 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);ove
 @keyframes feedCycle{0%{opacity:0;transform:translateY(20px)}5%{opacity:1;transform:translateY(0)}30%{opacity:1;transform:translateY(0)}33%{opacity:0;transform:translateY(-20px)}100%{opacity:0}}
 .feed-card img{width:100%;height:100%;object-fit:cover}
 .feed-card .feed-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.4) 0%,transparent 30%,transparent 55%,rgba(0,0,0,0.85) 100%)}
-
 .ai-badge{position:absolute;top:40px;left:14px;display:flex;align-items:center;gap:6px;padding:4px 10px;background:rgba(0,0,0,0.6);border:1px solid rgba(168,85,247,0.5);border-radius:100px;font-size:0.6rem;font-weight:600;color:var(--violet);z-index:5;backdrop-filter:blur(4px);letter-spacing:0.05em}
 .ai-dot{width:6px;height:6px;background:var(--violet);border-radius:50%;animation:blink 1.5s ease infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
 .live-badge{position:absolute;top:40px;right:14px;display:flex;align-items:center;gap:5px;padding:4px 10px;background:rgba(255,27,107,0.9);border-radius:6px;font-size:0.6rem;font-weight:700;color:#fff;z-index:5;letter-spacing:0.05em}
 .live-dot{width:5px;height:5px;background:#fff;border-radius:50%;animation:blink 1s ease infinite}
-
 .feed-actions{position:absolute;right:10px;bottom:80px;display:flex;flex-direction:column;align-items:center;gap:16px;z-index:5}
 .feed-action{display:flex;flex-direction:column;align-items:center;gap:2px}
 .feed-action-icon{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:0.9rem;backdrop-filter:blur(4px)}
 .feed-action-count{font-size:0.55rem;color:rgba(255,255,255,0.7)}
-
 .feed-info{position:absolute;bottom:55px;left:14px;right:60px;z-index:5}
 .feed-username{font-weight:700;font-size:0.85rem;margin-bottom:3px;text-shadow:0 1px 4px rgba(0,0,0,0.5)}
 .feed-caption{font-size:0.7rem;color:rgba(255,255,255,0.8);text-shadow:0 1px 4px rgba(0,0,0,0.5)}
-
 .phone-nav{position:absolute;bottom:0;left:0;right:0;height:48px;background:rgba(0,0,0,0.95);display:flex;justify-content:space-around;align-items:center;z-index:10;border-top:1px solid rgba(255,255,255,0.05)}
 .phone-nav-item{display:flex;flex-direction:column;align-items:center;gap:1px;font-size:0.45rem;color:var(--muted)}
 .phone-nav-item.active{color:var(--pink)}
 .phone-nav-icon{font-size:1rem}
 .phone-nav-plus{width:34px;height:26px;background:var(--gradient);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#fff;font-weight:700}
 
-/* AI SECTION */
+.stats-bar{padding:40px 24px;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05)}
+.stats-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-label{font-size:0.8rem;color:var(--muted);margin-top:4px}
+
 .ai-section{padding:100px 24px;max-width:1100px;margin:0 auto}
 .ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .ai-visual{position:relative;display:flex;justify-content:center}
@@ -86,13 +85,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);ove
 .ai-features li{padding:8px 0;font-size:0.9rem;color:var(--muted);display:flex;align-items:center;gap:10px}
 .ai-features li::before{content:'→';color:var(--violet);font-weight:700}
 
-/* STATS */
-.stats-bar{padding:40px 24px;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05)}
-.stats-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
-.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.stat-label{font-size:0.8rem;color:var(--muted);margin-top:4px}
-
-/* TIERS */
 .tiers-section{padding:100px 24px;background:var(--surface)}
 .tiers-inner{max-width:1100px;margin:0 auto;text-align:center}
 .tiers-inner .label{font-size:0.75rem;letter-spacing:0.2em;color:var(--pink);font-weight:600;margin-bottom:12px;text-transform:uppercase}
@@ -102,7 +94,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);ove
 .tier{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:32px 24px;text-align:left;transition:all 0.4s;position:relative}
 .tier:hover{transform:translateY(-4px);border-color:rgba(255,255,255,0.1)}
 .tier.pop{border-color:var(--violet);background:linear-gradient(180deg,rgba(168,85,247,0.06) 0%,var(--card) 100%)}
-.tier.pop::before{content:'MOST POPULAR';position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--gradient);padding:4px 14px;border-radius:100px;font-size:0.6rem;font-weight:700;letter-spacing:0.1em}
+.tier.pop::before{content:attr(data-popular);position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--gradient);padding:4px 14px;border-radius:100px;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;white-space:nowrap}
 .tier-name{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.05em;margin-bottom:4px}
 .tier-name.bronze{color:#CD7F32}.tier-name.silver{color:#C0C0C0}.tier-name.gold{color:#FFD700}
 .tier-eth{font-size:2rem;font-weight:700;margin-bottom:2px}
@@ -117,7 +109,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);ove
 .tier-btn-outline{background:transparent;color:var(--violet);border:1px solid rgba(168,85,247,0.3)}
 .tier-btn:hover{transform:translateY(-1px)}
 
-/* WAITLIST */
 .wl-section{padding:100px 24px;text-align:center;position:relative}
 .wl-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(255,27,107,0.06) 0%,transparent 60%);pointer-events:none}
 .wl-inner{max-width:500px;margin:0 auto;position:relative}
@@ -145,7 +136,7 @@ footer .copy{font-size:0.65rem;color:#444}
   .ai-grid{grid-template-columns:1fr}
   .tiers-grid{grid-template-columns:1fr}
   .wl-form{flex-direction:column}
-  .nav-right a:not(.nav-btn){display:none}
+  .nav-right a:not(.nav-btn):not(.lang-switch-wrap){display:none}
 }
 </style>
 </head>
@@ -154,89 +145,63 @@ footer .copy{font-size:0.65rem;color:#444}
 <nav class="nav">
   <div class="nav-logo">MASQ</div>
   <div class="nav-right">
-    <a href="#ai">AI Face Swap</a>
-    <a href="#tiers">Mint</a>
-    <a href="#waitlist" class="nav-btn">Join Waitlist</a>
+    <a href="#ai" data-en="AI Face Swap" data-jp="AI顔変換">AI Face Swap</a>
+    <a href="#tiers" data-en="Mint" data-jp="ミント">Mint</a>
+    <div class="lang-switch">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('jp')">JP</button>
+    </div>
+    <a href="#waitlist" class="nav-btn" data-en="Join Waitlist" data-jp="ウェイトリスト登録">Join Waitlist</a>
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-text">
-      <div class="nsfw-badge">🔞 18+ CREATOR PLATFORM</div>
-      <h1>SWIPE.<br><span class="line2">SUBSCRIBE.<br>STAY HIDDEN.</span></h1>
-      <p class="sub">A <strong>TikTok-style adult platform</strong> with <strong>real-time AI face swap</strong>. Go live, post explicit content, build a massive fanbase — without anyone knowing who you are.</p>
+      <div class="nsfw-badge" data-en="🔞 18+ CREATOR PLATFORM" data-jp="🔞 18+ クリエイタープラットフォーム">🔞 18+ CREATOR PLATFORM</div>
+      <h1>
+        <span data-en="SWIPE." data-jp="スワイプ。">SWIPE.</span><br>
+        <span class="line2"><span data-en="SUBSCRIBE." data-jp="登録。">SUBSCRIBE.</span><br><span data-en="STAY HIDDEN." data-jp="匿名のまま。">STAY HIDDEN.</span></span>
+      </h1>
+      <p class="sub" data-en='A <strong>TikTok-style adult platform</strong> with <strong>real-time AI face swap</strong>. Go live, post explicit content, build a massive fanbase — without anyone knowing who you are.' data-jp='<strong>TikTok型UIの18+プラットフォーム</strong>に<strong>リアルタイムAI顔変換</strong>を搭載。ライブ配信、コンテンツ投稿、ファン獲得 — すべて匿名のまま。'>A <strong>TikTok-style adult platform</strong> with <strong>real-time AI face swap</strong>. Go live, post explicit content, build a massive fanbase — without anyone knowing who you are.</p>
       <div class="hero-ctas">
-        <a href="#tiers" class="btn-big">Mint Founders Pass</a>
-        <a href="#ai" class="btn-ghost">See the AI →</a>
+        <a href="#tiers" class="btn-big" data-en="Mint Founders Pass" data-jp="Founders Passをミント">Mint Founders Pass</a>
+        <a href="#ai" class="btn-ghost" data-en="See the AI →" data-jp="AI顔変換を見る →">See the AI →</a>
       </div>
     </div>
-
     <div class="phone-wrapper">
       <div class="phone">
         <div class="phone-notch"></div>
         <div class="phone-screen">
-          <!-- Feed Card 1 -->
           <div class="feed-card">
-            <img src="card1.jpg" alt="">
-            <div class="feed-overlay"></div>
+            <img src="card1.jpg" alt=""><div class="feed-overlay"></div>
             <div class="ai-badge"><span class="ai-dot"></span> AI FACE ACTIVE</div>
             <div class="live-badge"><span class="live-dot"></span> LIVE · 2.1K</div>
-            <div class="feed-actions">
-              <div class="feed-action"><div class="feed-action-icon">♥</div><div class="feed-action-count">24.1K</div></div>
-              <div class="feed-action"><div class="feed-action-icon">💬</div><div class="feed-action-count">892</div></div>
-              <div class="feed-action"><div class="feed-action-icon">💎</div><div class="feed-action-count">Tip</div></div>
-              <div class="feed-action"><div class="feed-action-icon">↗</div><div class="feed-action-count">Share</div></div>
-            </div>
-            <div class="feed-info">
-              <div class="feed-username">@luna_anonymous</div>
-              <div class="feed-caption">nobody knows who i am 🎭✨</div>
-            </div>
+            <div class="feed-actions"><div class="feed-action"><div class="feed-action-icon">♥</div><div class="feed-action-count">24.1K</div></div><div class="feed-action"><div class="feed-action-icon">💬</div><div class="feed-action-count">892</div></div><div class="feed-action"><div class="feed-action-icon">💎</div><div class="feed-action-count">Tip</div></div><div class="feed-action"><div class="feed-action-icon">↗</div><div class="feed-action-count">Share</div></div></div>
+            <div class="feed-info"><div class="feed-username">@luna_anonymous</div><div class="feed-caption" data-en="nobody knows who i am 🎭✨" data-jp="誰にもバレない 🎭✨">nobody knows who i am 🎭✨</div></div>
           </div>
-          <!-- Feed Card 2 -->
           <div class="feed-card">
-            <img src="card2.jpg" alt="">
-            <div class="feed-overlay"></div>
+            <img src="card2.jpg" alt=""><div class="feed-overlay"></div>
             <div class="ai-badge"><span class="ai-dot"></span> AI FACE ACTIVE</div>
             <div class="live-badge"><span class="live-dot"></span> LIVE · 1.8K</div>
-            <div class="feed-actions">
-              <div class="feed-action"><div class="feed-action-icon">♥</div><div class="feed-action-count">18.5K</div></div>
-              <div class="feed-action"><div class="feed-action-icon">💬</div><div class="feed-action-count">1.2K</div></div>
-              <div class="feed-action"><div class="feed-action-icon">💎</div><div class="feed-action-count">Tip</div></div>
-              <div class="feed-action"><div class="feed-action-icon">↗</div><div class="feed-action-count">Share</div></div>
-            </div>
-            <div class="feed-info">
-              <div class="feed-username">@velvet_mask</div>
-              <div class="feed-caption">subscribers only tonight 🔥</div>
-            </div>
+            <div class="feed-actions"><div class="feed-action"><div class="feed-action-icon">♥</div><div class="feed-action-count">18.5K</div></div><div class="feed-action"><div class="feed-action-icon">💬</div><div class="feed-action-count">1.2K</div></div><div class="feed-action"><div class="feed-action-icon">💎</div><div class="feed-action-count">Tip</div></div><div class="feed-action"><div class="feed-action-icon">↗</div><div class="feed-action-count">Share</div></div></div>
+            <div class="feed-info"><div class="feed-username">@velvet_mask</div><div class="feed-caption" data-en="subscribers only tonight 🔥" data-jp="今夜はサブスク限定 🔥">subscribers only tonight 🔥</div></div>
           </div>
-          <!-- Feed Card 3 -->
           <div class="feed-card">
-            <img src="card3.jpg" alt="">
-            <div class="feed-overlay"></div>
+            <img src="card3.jpg" alt=""><div class="feed-overlay"></div>
             <div class="ai-badge"><span class="ai-dot"></span> AI FACE ACTIVE</div>
             <div class="live-badge"><span class="live-dot"></span> LIVE · 1.5K</div>
-            <div class="feed-actions">
-              <div class="feed-action"><div class="feed-action-icon">♥</div><div class="feed-action-count">31.7K</div></div>
-              <div class="feed-action"><div class="feed-action-icon">💬</div><div class="feed-action-count">2.4K</div></div>
-              <div class="feed-action"><div class="feed-action-icon">💎</div><div class="feed-action-count">Tip</div></div>
-              <div class="feed-action"><div class="feed-action-icon">↗</div><div class="feed-action-count">Share</div></div>
-            </div>
-            <div class="feed-info">
-              <div class="feed-username">@phantom_girl</div>
-              <div class="feed-caption">new PPV dropped 💜</div>
-            </div>
+            <div class="feed-actions"><div class="feed-action"><div class="feed-action-icon">♥</div><div class="feed-action-count">31.7K</div></div><div class="feed-action"><div class="feed-action-icon">💬</div><div class="feed-action-count">2.4K</div></div><div class="feed-action"><div class="feed-action-icon">💎</div><div class="feed-action-count">Tip</div></div><div class="feed-action"><div class="feed-action-icon">↗</div><div class="feed-action-count">Share</div></div></div>
+            <div class="feed-info"><div class="feed-username">@phantom_girl</div><div class="feed-caption" data-en="new PPV dropped 💜" data-jp="新しいPPV公開 💜">new PPV dropped 💜</div></div>
           </div>
-
           <div class="phone-nav">
-            <div class="phone-nav-item active"><span class="phone-nav-icon">🏠</span>Home</div>
-            <div class="phone-nav-item"><span class="phone-nav-icon">🔍</span>Discover</div>
+            <div class="phone-nav-item active"><span class="phone-nav-icon">🏠</span><span data-en="Home" data-jp="ホーム">Home</span></div>
+            <div class="phone-nav-item"><span class="phone-nav-icon">🔍</span><span data-en="Discover" data-jp="探す">Discover</span></div>
             <div class="phone-nav-item"><span class="phone-nav-plus">+</span></div>
-            <div class="phone-nav-item"><span class="phone-nav-icon">💬</span>DMs</div>
-            <div class="phone-nav-item"><span class="phone-nav-icon">👤</span>Me</div>
+            <div class="phone-nav-item"><span class="phone-nav-icon">💬</span>DM</div>
+            <div class="phone-nav-item"><span class="phone-nav-icon">👤</span><span data-en="Me" data-jp="自分">Me</span></div>
           </div>
         </div>
       </div>
@@ -244,123 +209,153 @@ footer .copy{font-size:0.65rem;color:#444}
   </div>
 </section>
 
-<!-- STATS -->
 <div class="stats-bar">
   <div class="stats-inner">
-    <div><div class="stat-num">$97B</div><div class="stat-label">Adult content market by 2031</div></div>
-    <div><div class="stat-num">370M</div><div class="stat-label">OnlyFans registered users</div></div>
-    <div><div class="stat-num">0.5%</div><div class="stat-label">Payment processing fee</div></div>
-    <div><div class="stat-num">750</div><div class="stat-label">Founders Passes total</div></div>
+    <div><div class="stat-num">$97B</div><div class="stat-label" data-en="Adult content market by 2031" data-jp="アダルトコンテンツ市場 2031年">Adult content market by 2031</div></div>
+    <div><div class="stat-num">370M</div><div class="stat-label" data-en="OnlyFans registered users" data-jp="OnlyFans登録ユーザー">OnlyFans registered users</div></div>
+    <div><div class="stat-num">0.5%</div><div class="stat-label" data-en="Payment processing fee" data-jp="決済手数料">Payment processing fee</div></div>
+    <div><div class="stat-num">750</div><div class="stat-label" data-en="Founders Passes total" data-jp="Founders Pass 総数">Founders Passes total</div></div>
   </div>
 </div>
 
-<!-- AI SECTION -->
 <section class="ai-section" id="ai">
   <div class="ai-grid">
     <div class="ai-visual">
       <img src="solo.jpg" alt="">
-      <div class="mask-tag">🎭 AI FACE — NOT HER REAL IDENTITY</div>
+      <div class="mask-tag" data-en="🎭 AI FACE — NOT HER REAL IDENTITY" data-jp="🎭 AI生成の顔 — 本人ではありません">🎭 AI FACE — NOT HER REAL IDENTITY</div>
     </div>
     <div class="ai-text">
-      <div class="label">Core Technology</div>
-      <h2>HER FACE?<br>COMPLETELY<br>AI-GENERATED.</h2>
-      <p>The woman you see doesn't exist. Our AI replaces the creator's real face in real-time — preserving expressions, lip sync, and natural movement at 30fps.</p>
+      <div class="label" data-en="Core Technology" data-jp="コアテクノロジー">Core Technology</div>
+      <h2><span data-en="HER FACE?" data-jp="この顔？">HER FACE?</span><br><span data-en="COMPLETELY" data-jp="完全に">COMPLETELY</span><br><span data-en="AI-GENERATED." data-jp="AI生成。">AI-GENERATED.</span></h2>
+      <p data-en="The woman you see doesn't exist. Our AI replaces the creator's real face in real-time — preserving expressions, lip sync, and natural movement at 30fps." data-jp="画面の女性は実在しません。AIがクリエイターの顔をリアルタイムで変換。表情・リップシンク・動きを30fpsで完全再現。">The woman you see doesn't exist. Our AI replaces the creator's real face in real-time — preserving expressions, lip sync, and natural movement at 30fps.</p>
       <ul class="ai-features">
-        <li>Works in live streams with zero noticeable lag</li>
-        <li>Choose from AI personas or create a custom face</li>
-        <li>Also works on uploaded videos (post-production)</li>
-        <li>Your real face never touches our servers</li>
-        <li>Undetectable by viewers — it just looks natural</li>
+        <li data-en="Works in live streams with zero noticeable lag" data-jp="ライブ配信でも遅延ゼロで動作">Works in live streams with zero noticeable lag</li>
+        <li data-en="Choose from AI personas or create a custom face" data-jp="AIペルソナから選択、またはカスタム顔を作成">Choose from AI personas or create a custom face</li>
+        <li data-en="Also works on uploaded videos (post-production)" data-jp="アップロード動画にも対応（後処理）">Also works on uploaded videos (post-production)</li>
+        <li data-en="Your real face never touches our servers" data-jp="本当の顔はサーバーに一切保存されない">Your real face never touches our servers</li>
+        <li data-en="Undetectable by viewers — it just looks natural" data-jp="視聴者には検出不可能 — 自然に見える">Undetectable by viewers — it just looks natural</li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- TIERS -->
 <section class="tiers-section" id="tiers">
   <div class="tiers-inner">
     <div class="label">Founders Pass NFT</div>
-    <h2>750 PASSES. THEN IT'S OVER.</h2>
-    <p class="sub">Founding members get permanent benefits. Mint with ETH, USDT, or credit card.</p>
+    <h2 data-en="750 PASSES. THEN IT'S OVER." data-jp="750枚限定。売り切れたら終了。">750 PASSES. THEN IT'S OVER.</h2>
+    <p class="sub" data-en="Founding members get permanent benefits. Mint with ETH, USDT, or credit card." data-jp="創設メンバーは永久特典付き。ETH・USDT・クレジットカードでミント可能。">Founding members get permanent benefits. Mint with ETH, USDT, or credit card.</p>
     <div class="tiers-grid">
       <div class="tier">
         <div class="tier-name bronze">EXPLORER</div>
         <div class="tier-eth">0.05 ETH</div>
-        <div class="tier-usd">~$150 · Card accepted</div>
-        <div class="tier-supply">500 available</div>
+        <div class="tier-usd" data-en="~$150 · Card accepted" data-jp="~¥22,500 · カード対応">~$150 · Card accepted</div>
+        <div class="tier-supply" data-en="500 available" data-jp="500枚">500 available</div>
         <ul class="tier-list">
-          <li><span class="y">✓</span> 6 months premium access</li>
-          <li><span class="y">✓</span> Explorer badge</li>
-          <li><span class="y">✓</span> Early feature access</li>
-          <li><span class="n">—</span> All-creator content</li>
-          <li><span class="n">—</span> Founders Discord</li>
-          <li><span class="n">—</span> Product voting</li>
+          <li><span class="y">✓</span> <span data-en="6 months premium access" data-jp="6ヶ月プレミアムアクセス">6 months premium access</span></li>
+          <li><span class="y">✓</span> <span data-en="Explorer badge" data-jp="エクスプローラーバッジ">Explorer badge</span></li>
+          <li><span class="y">✓</span> <span data-en="Early feature access" data-jp="新機能の先行アクセス">Early feature access</span></li>
+          <li><span class="n">—</span> <span data-en="All-creator content" data-jp="全クリエイターコンテンツ">All-creator content</span></li>
+          <li><span class="n">—</span> <span data-en="Founders Discord" data-jp="ファウンダーズDiscord">Founders Discord</span></li>
+          <li><span class="n">—</span> <span data-en="Product voting" data-jp="プロダクト投票権">Product voting</span></li>
         </ul>
-        <button class="tier-btn tier-btn-outline">Join Waitlist</button>
+        <button class="tier-btn tier-btn-outline" data-en="Join Waitlist" data-jp="ウェイトリスト登録">Join Waitlist</button>
       </div>
-      <div class="tier pop">
+      <div class="tier pop" data-popular="MOST POPULAR" data-popular-jp="一番人気">
         <div class="tier-name silver">CREATOR</div>
         <div class="tier-eth">0.15 ETH</div>
-        <div class="tier-usd">~$450 · Card accepted</div>
-        <div class="tier-supply">200 available</div>
+        <div class="tier-usd" data-en="~$450 · Card accepted" data-jp="~¥67,500 · カード対応">~$450 · Card accepted</div>
+        <div class="tier-supply" data-en="200 available" data-jp="200枚">200 available</div>
         <ul class="tier-list">
-          <li><span class="y">✓</span> 12 months premium access</li>
-          <li><span class="y">✓</span> Creator badge</li>
-          <li><span class="y">✓</span> Early feature access</li>
-          <li><span class="y">✓</span> 3mo all-creator content</li>
-          <li><span class="y">✓</span> Founders Discord</li>
-          <li><span class="n">—</span> Product voting</li>
+          <li><span class="y">✓</span> <span data-en="12 months premium access" data-jp="12ヶ月プレミアムアクセス">12 months premium access</span></li>
+          <li><span class="y">✓</span> <span data-en="Creator badge" data-jp="クリエイターバッジ">Creator badge</span></li>
+          <li><span class="y">✓</span> <span data-en="Early feature access" data-jp="新機能の先行アクセス">Early feature access</span></li>
+          <li><span class="y">✓</span> <span data-en="3mo all-creator content" data-jp="3ヶ月全クリエイターコンテンツ">3mo all-creator content</span></li>
+          <li><span class="y">✓</span> <span data-en="Founders Discord" data-jp="ファウンダーズDiscord">Founders Discord</span></li>
+          <li><span class="n">—</span> <span data-en="Product voting" data-jp="プロダクト投票権">Product voting</span></li>
         </ul>
-        <button class="tier-btn tier-btn-fill">Join Waitlist</button>
+        <button class="tier-btn tier-btn-fill" data-en="Join Waitlist" data-jp="ウェイトリスト登録">Join Waitlist</button>
       </div>
       <div class="tier">
         <div class="tier-name gold">FOUNDERS</div>
         <div class="tier-eth">0.5 ETH</div>
-        <div class="tier-usd">~$1,500 · Card accepted</div>
-        <div class="tier-supply">50 available</div>
+        <div class="tier-usd" data-en="~$1,500 · Card accepted" data-jp="~¥225,000 · カード対応">~$1,500 · Card accepted</div>
+        <div class="tier-supply" data-en="50 available" data-jp="50枚">50 available</div>
         <ul class="tier-list">
-          <li><span class="y">✓</span> Lifetime premium access</li>
-          <li><span class="y">✓</span> Gold Founders badge</li>
-          <li><span class="y">✓</span> Early feature access</li>
-          <li><span class="y">✓</span> 12mo all-creator content</li>
-          <li><span class="y">✓</span> Founders Discord</li>
-          <li><span class="y">✓</span> Product voting</li>
+          <li><span class="y">✓</span> <span data-en="Lifetime premium access" data-jp="永久プレミアムアクセス">Lifetime premium access</span></li>
+          <li><span class="y">✓</span> <span data-en="Gold Founders badge" data-jp="ゴールドファウンダーズバッジ">Gold Founders badge</span></li>
+          <li><span class="y">✓</span> <span data-en="Early feature access" data-jp="新機能の先行アクセス">Early feature access</span></li>
+          <li><span class="y">✓</span> <span data-en="12mo all-creator content" data-jp="12ヶ月全クリエイターコンテンツ">12mo all-creator content</span></li>
+          <li><span class="y">✓</span> <span data-en="Founders Discord" data-jp="ファウンダーズDiscord">Founders Discord</span></li>
+          <li><span class="y">✓</span> <span data-en="Product voting" data-jp="プロダクト投票権">Product voting</span></li>
         </ul>
-        <button class="tier-btn tier-btn-fill">Join Waitlist</button>
+        <button class="tier-btn tier-btn-fill" data-en="Join Waitlist" data-jp="ウェイトリスト登録">Join Waitlist</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WAITLIST -->
 <section class="wl-section" id="waitlist">
   <div class="wl-inner">
-    <h2>GET EARLY ACCESS.</h2>
-    <p>Waitlist members mint 24 hours before public sale. Drop your email — we notify you when it's live.</p>
+    <h2 data-en="GET EARLY ACCESS." data-jp="先行アクセスを獲得。">GET EARLY ACCESS.</h2>
+    <p data-en="Waitlist members mint 24 hours before public sale. Drop your email — we notify you when it's live." data-jp="ウェイトリスト登録者は一般販売の24時間前にミント可能。メールを登録すればミント開始時に通知します。">Waitlist members mint 24 hours before public sale. Drop your email — we notify you when it's live.</p>
     <div class="wl-form">
-      <input type="email" placeholder="your@email.com" id="emailInput">
-      <button onclick="handleWL()">Join</button>
+      <input type="email" id="emailInput" data-en-ph="your@email.com" data-jp-ph="メールアドレス" placeholder="your@email.com">
+      <button onclick="handleWL()" data-en="Join" data-jp="登録">Join</button>
     </div>
-    <p class="wl-count"><span id="cnt">847</span> people on the waitlist</p>
+    <p class="wl-count"><span id="cnt">847</span> <span data-en="people on the waitlist" data-jp="人がウェイトリスト登録済み">people on the waitlist</span></p>
   </div>
 </section>
 
 <footer>
   <div class="fl">MASQ</div>
   <div class="links"><a href="#">Twitter / X</a><a href="#">Discord</a><a href="#">Docs</a><a href="#">Terms</a></div>
-  <p class="copy">&copy; 2026 MASQ. Founders Pass is a platform access token, not a security or investment product. 18+ only.</p>
+  <p class="copy" data-en="© 2026 MASQ. Founders Pass is a platform access token, not a security or investment product. 18+ only." data-jp="© 2026 MASQ. Founders Passはプラットフォームアクセストークンであり、証券や投資商品ではありません。18歳以上限定。">© 2026 MASQ. Founders Pass is a platform access token, not a security or investment product. 18+ only.</p>
 </footer>
 
 <script>
+var currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelector('.lang-btn[onclick="setLang(\'' + lang + '\')"]').classList.add('active');
+
+  document.querySelectorAll('[data-' + lang + ']').forEach(function(el) {
+    var val = el.getAttribute('data-' + lang);
+    if (val) el.innerHTML = val;
+  });
+
+  // Handle placeholders
+  var emailInput = document.getElementById('emailInput');
+  if (lang === 'jp') {
+    emailInput.placeholder = emailInput.getAttribute('data-jp-ph');
+  } else {
+    emailInput.placeholder = emailInput.getAttribute('data-en-ph');
+  }
+
+  // Handle tier popular badge
+  document.querySelectorAll('.tier.pop').forEach(function(t) {
+    if (lang === 'jp') {
+      t.setAttribute('data-popular', t.getAttribute('data-popular-jp'));
+      t.style.setProperty('--pop-text', '"' + t.getAttribute('data-popular-jp') + '"');
+    } else {
+      t.setAttribute('data-popular', 'MOST POPULAR');
+    }
+  });
+
+  document.documentElement.lang = lang === 'jp' ? 'ja' : 'en';
+}
+
 function handleWL() {
   var e = document.getElementById('emailInput');
   if (e.value && e.value.includes('@')) {
     var b = document.querySelector('.wl-form button');
-    b.textContent = "You're in!";
+    b.textContent = currentLang === 'jp' ? '登録完了!' : "You're in!";
     b.style.background = 'linear-gradient(135deg,#00C853,#00BFA5)';
     document.getElementById('cnt').textContent = parseInt(document.getElementById('cnt').textContent) + 1;
   }
 }
+
 var c = 0, t = 847;
 var ci = setInterval(function() {
   c += Math.ceil(t / 40);
