@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MASQ — Anonymous 18+ Creator Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#000;--surface:#0A0A0A;--card:#111;--pink:#FF1B6B;--violet:#A855F7;
+  --text:#fff;--muted:#888;--gradient:linear-gradient(135deg,#FF1B6B,#A855F7);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(20px);background:rgba(0,0,0,0.75);border-bottom:1px solid rgba(255,255,255,0.05)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-right a{color:var(--muted);text-decoration:none;font-size:0.85rem;transition:color 0.3s}
+.nav-right a:hover{color:#fff}
+.nav-btn{padding:8px 20px;background:var(--gradient);color:#fff;border:none;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:600;cursor:pointer;text-decoration:none}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 24px 40px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('hero_blur.jpg') center/cover no-repeat;opacity:0.35}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 40%,rgba(0,0,0,0.85) 100%)}
+.hero-content{display:grid;grid-template-columns:1fr 1fr;gap:50px;max-width:1100px;align-items:center;position:relative;z-index:1}
+.hero-text h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,8vw,7rem);line-height:0.95;letter-spacing:0.02em;margin-bottom:20px}
+.hero-text h1 .line2{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-text .sub{font-size:1.1rem;color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:32px;font-weight:300}
+.hero-text .sub strong{color:#fff;font-weight:600}
+.nsfw-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(255,27,107,0.15);border:1px solid rgba(255,27,107,0.3);border-radius:100px;font-size:0.75rem;font-weight:600;color:var(--pink);margin-bottom:20px;letter-spacing:0.05em}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btn-big{padding:16px 36px;background:var(--gradient);color:#fff;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:600;border:none;border-radius:100px;cursor:pointer;text-decoration:none;transition:all 0.3s}
+.btn-big:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(255,27,107,0.35)}
+.btn-ghost{padding:16px 36px;background:transparent;color:#fff;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500;border:1px solid rgba(255,255,255,0.15);border-radius:100px;cursor:pointer;text-decoration:none;transition:all 0.3s}
+.btn-ghost:hover{border-color:var(--violet)}
+
+/* PHONE */
+.phone-wrapper{display:flex;justify-content:center;perspective:1000px}
+.phone{width:280px;height:580px;background:#000;border-radius:36px;border:3px solid #222;position:relative;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,0.8),0 0 80px rgba(255,27,107,0.12);transform:rotateY(-5deg) rotateX(2deg);transition:transform 0.5s}
+.phone:hover{transform:rotateY(0) rotateX(0)}
+.phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:28px;background:#000;border-radius:0 0 16px 16px;z-index:10}
+.phone-screen{width:100%;height:100%;position:relative;overflow:hidden}
+
+.feed-card{position:absolute;inset:0;opacity:0;animation:feedCycle 12s ease infinite}
+.feed-card:nth-child(1){animation-delay:0s}
+.feed-card:nth-child(2){animation-delay:4s}
+.feed-card:nth-child(3){animation-delay:8s}
+@keyframes feedCycle{0%{opacity:0;transform:translateY(20px)}5%{opacity:1;transform:translateY(0)}30%{opacity:1;transform:translateY(0)}33%{opacity:0;transform:translateY(-20px)}100%{opacity:0}}
+.feed-card img{width:100%;height:100%;object-fit:cover}
+.feed-card .feed-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.4) 0%,transparent 30%,transparent 55%,rgba(0,0,0,0.85) 100%)}
+
+.ai-badge{position:absolute;top:40px;left:14px;display:flex;align-items:center;gap:6px;padding:4px 10px;background:rgba(0,0,0,0.6);border:1px solid rgba(168,85,247,0.5);border-radius:100px;font-size:0.6rem;font-weight:600;color:var(--violet);z-index:5;backdrop-filter:blur(4px);letter-spacing:0.05em}
+.ai-dot{width:6px;height:6px;background:var(--violet);border-radius:50%;animation:blink 1.5s ease infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.live-badge{position:absolute;top:40px;right:14px;display:flex;align-items:center;gap:5px;padding:4px 10px;background:rgba(255,27,107,0.9);border-radius:6px;font-size:0.6rem;font-weight:700;color:#fff;z-index:5;letter-spacing:0.05em}
+.live-dot{width:5px;height:5px;background:#fff;border-radius:50%;animation:blink 1s ease infinite}
+
+.feed-actions{position:absolute;right:10px;bottom:80px;display:flex;flex-direction:column;align-items:center;gap:16px;z-index:5}
+.feed-action{display:flex;flex-direction:column;align-items:center;gap:2px}
+.feed-action-icon{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:0.9rem;backdrop-filter:blur(4px)}
+.feed-action-count{font-size:0.55rem;color:rgba(255,255,255,0.7)}
+
+.feed-info{position:absolute;bottom:55px;left:14px;right:60px;z-index:5}
+.feed-username{font-weight:700;font-size:0.85rem;margin-bottom:3px;text-shadow:0 1px 4px rgba(0,0,0,0.5)}
+.feed-caption{font-size:0.7rem;color:rgba(255,255,255,0.8);text-shadow:0 1px 4px rgba(0,0,0,0.5)}
+
+.phone-nav{position:absolute;bottom:0;left:0;right:0;height:48px;background:rgba(0,0,0,0.95);display:flex;justify-content:space-around;align-items:center;z-index:10;border-top:1px solid rgba(255,255,255,0.05)}
+.phone-nav-item{display:flex;flex-direction:column;align-items:center;gap:1px;font-size:0.45rem;color:var(--muted)}
+.phone-nav-item.active{color:var(--pink)}
+.phone-nav-icon{font-size:1rem}
+.phone-nav-plus{width:34px;height:26px;background:var(--gradient);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#fff;font-weight:700}
+
+/* AI SECTION */
+.ai-section{padding:100px 24px;max-width:1100px;margin:0 auto}
+.ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.ai-visual{position:relative;display:flex;justify-content:center}
+.ai-visual img{width:100%;max-width:340px;border-radius:20px;border:2px solid rgba(255,255,255,0.08);box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.mask-tag{position:absolute;top:20px;left:50%;transform:translateX(-50%);padding:8px 18px;background:rgba(168,85,247,0.85);border-radius:100px;font-size:0.75rem;font-weight:700;letter-spacing:0.08em;backdrop-filter:blur(4px);white-space:nowrap;z-index:2}
+.ai-text .label{font-size:0.75rem;letter-spacing:0.2em;color:var(--pink);font-weight:600;margin-bottom:12px;text-transform:uppercase}
+.ai-text h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);line-height:1;margin-bottom:16px;letter-spacing:0.02em}
+.ai-text p{color:var(--muted);line-height:1.8;font-size:0.95rem;margin-bottom:20px}
+.ai-features{list-style:none}
+.ai-features li{padding:8px 0;font-size:0.9rem;color:var(--muted);display:flex;align-items:center;gap:10px}
+.ai-features li::before{content:'→';color:var(--violet);font-weight:700}
+
+/* STATS */
+.stats-bar{padding:40px 24px;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05)}
+.stats-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-label{font-size:0.8rem;color:var(--muted);margin-top:4px}
+
+/* TIERS */
+.tiers-section{padding:100px 24px;background:var(--surface)}
+.tiers-inner{max-width:1100px;margin:0 auto;text-align:center}
+.tiers-inner .label{font-size:0.75rem;letter-spacing:0.2em;color:var(--pink);font-weight:600;margin-bottom:12px;text-transform:uppercase}
+.tiers-inner h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);margin-bottom:12px;letter-spacing:0.02em}
+.tiers-inner .sub{color:var(--muted);font-size:1rem;margin-bottom:48px}
+.tiers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tier{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:32px 24px;text-align:left;transition:all 0.4s;position:relative}
+.tier:hover{transform:translateY(-4px);border-color:rgba(255,255,255,0.1)}
+.tier.pop{border-color:var(--violet);background:linear-gradient(180deg,rgba(168,85,247,0.06) 0%,var(--card) 100%)}
+.tier.pop::before{content:'MOST POPULAR';position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--gradient);padding:4px 14px;border-radius:100px;font-size:0.6rem;font-weight:700;letter-spacing:0.1em}
+.tier-name{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.05em;margin-bottom:4px}
+.tier-name.bronze{color:#CD7F32}.tier-name.silver{color:#C0C0C0}.tier-name.gold{color:#FFD700}
+.tier-eth{font-size:2rem;font-weight:700;margin-bottom:2px}
+.tier-usd{font-size:0.8rem;color:var(--muted);margin-bottom:4px}
+.tier-supply{font-size:0.75rem;color:var(--pink);font-weight:600;margin-bottom:20px}
+.tier-list{list-style:none;margin-bottom:24px}
+.tier-list li{padding:6px 0;font-size:0.8rem;color:var(--muted);display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,0.03)}
+.tier-list li:last-child{border:none}
+.tier-list .y{color:var(--violet)}.tier-list .n{color:#333}
+.tier-btn{width:100%;padding:12px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:600;cursor:pointer;border:none;transition:all 0.3s}
+.tier-btn-fill{background:var(--gradient);color:#fff}
+.tier-btn-outline{background:transparent;color:var(--violet);border:1px solid rgba(168,85,247,0.3)}
+.tier-btn:hover{transform:translateY(-1px)}
+
+/* WAITLIST */
+.wl-section{padding:100px 24px;text-align:center;position:relative}
+.wl-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(255,27,107,0.06) 0%,transparent 60%);pointer-events:none}
+.wl-inner{max-width:500px;margin:0 auto;position:relative}
+.wl-inner h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);margin-bottom:12px;letter-spacing:0.02em}
+.wl-inner p{color:var(--muted);margin-bottom:28px;line-height:1.7}
+.wl-form{display:flex;gap:8px}
+.wl-form input{flex:1;padding:14px 20px;background:var(--card);border:1px solid rgba(255,255,255,0.08);border-radius:100px;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none}
+.wl-form input:focus{border-color:var(--violet)}
+.wl-form input::placeholder{color:#555}
+.wl-form button{padding:14px 28px;background:var(--gradient);color:#fff;border:none;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;white-space:nowrap}
+.wl-count{margin-top:16px;font-size:0.8rem;color:var(--muted)}
+.wl-count span{color:var(--pink);font-weight:700}
+
+footer{padding:40px 24px;border-top:1px solid rgba(255,255,255,0.05);text-align:center}
+footer .fl{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;letter-spacing:0.05em}
+footer .links{display:flex;justify-content:center;gap:24px;margin-bottom:12px}
+footer .links a{color:var(--muted);text-decoration:none;font-size:0.8rem}
+footer .copy{font-size:0.65rem;color:#444}
+
+@media (max-width:768px){
+  .hero-content{grid-template-columns:1fr;text-align:center}
+  .hero-ctas{justify-content:center}
+  .phone{width:240px;height:500px}
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .ai-grid{grid-template-columns:1fr}
+  .tiers-grid{grid-template-columns:1fr}
+  .wl-form{flex-direction:column}
+  .nav-right a:not(.nav-btn){display:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">MASQ</div>
+  <div class="nav-right">
+    <a href="#ai">AI Face Swap</a>
+    <a href="#tiers">Mint</a>
+    <a href="#waitlist" class="nav-btn">Join Waitlist</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="nsfw-badge">🔞 18+ CREATOR PLATFORM</div>
+      <h1>SWIPE.<br><span class="line2">SUBSCRIBE.<br>STAY HIDDEN.</span></h1>
+      <p class="sub">A <strong>TikTok-style adult platform</strong> with <strong>real-time AI face swap</strong>. Go live, post explicit content, build a massive fanbase — without anyone knowing who you are.</p>
+      <div class="hero-ctas">
+        <a href="#tiers" class="btn-big">Mint Founders Pass</a>
+        <a href="#ai" class="btn-ghost">See the AI →</a>
+      </div>
+    </div>
+
+    <div class="phone-wrapper">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <!-- Feed Card 1 -->
+          <div class="feed-card">
+            <img src="card1.jpg" alt="">
+            <div class="feed-overlay"></div>
+            <div class="ai-badge"><span class="ai-dot"></span> AI FACE ACTIVE</div>
+            <div class="live-badge"><span class="live-dot"></span> LIVE · 2.1K</div>
+            <div class="feed-actions">
+              <div class="feed-action"><div class="feed-action-icon">♥</div><div class="feed-action-count">24.1K</div></div>
+              <div class="feed-action"><div class="feed-action-icon">💬</div><div class="feed-action-count">892</div></div>
+              <div class="feed-action"><div class="feed-action-icon">💎</div><div class="feed-action-count">Tip</div></div>
+              <div class="feed-action"><div class="feed-action-icon">↗</div><div class="feed-action-count">Share</div></div>
+            </div>
+            <div class="feed-info">
+              <div class="feed-username">@luna_anonymous</div>
+              <div class="feed-caption">nobody knows who i am 🎭✨</div>
+            </div>
+          </div>
+          <!-- Feed Card 2 -->
+          <div class="feed-card">
+            <img src="card2.jpg" alt="">
+            <div class="feed-overlay"></div>
+            <div class="ai-badge"><span class="ai-dot"></span> AI FACE ACTIVE</div>
+            <div class="live-badge"><span class="live-dot"></span> LIVE · 1.8K</div>
+            <div class="feed-actions">
+              <div class="feed-action"><div class="feed-action-icon">♥</div><div class="feed-action-count">18.5K</div></div>
+              <div class="feed-action"><div class="feed-action-icon">💬</div><div class="feed-action-count">1.2K</div></div>
+              <div class="feed-action"><div class="feed-action-icon">💎</div><div class="feed-action-count">Tip</div></div>
+              <div class="feed-action"><div class="feed-action-icon">↗</div><div class="feed-action-count">Share</div></div>
+            </div>
+            <div class="feed-info">
+              <div class="feed-username">@velvet_mask</div>
+              <div class="feed-caption">subscribers only tonight 🔥</div>
+            </div>
+          </div>
+          <!-- Feed Card 3 -->
+          <div class="feed-card">
+            <img src="card3.jpg" alt="">
+            <div class="feed-overlay"></div>
+            <div class="ai-badge"><span class="ai-dot"></span> AI FACE ACTIVE</div>
+            <div class="live-badge"><span class="live-dot"></span> LIVE · 1.5K</div>
+            <div class="feed-actions">
+              <div class="feed-action"><div class="feed-action-icon">♥</div><div class="feed-action-count">31.7K</div></div>
+              <div class="feed-action"><div class="feed-action-icon">💬</div><div class="feed-action-count">2.4K</div></div>
+              <div class="feed-action"><div class="feed-action-icon">💎</div><div class="feed-action-count">Tip</div></div>
+              <div class="feed-action"><div class="feed-action-icon">↗</div><div class="feed-action-count">Share</div></div>
+            </div>
+            <div class="feed-info">
+              <div class="feed-username">@phantom_girl</div>
+              <div class="feed-caption">new PPV dropped 💜</div>
+            </div>
+          </div>
+
+          <div class="phone-nav">
+            <div class="phone-nav-item active"><span class="phone-nav-icon">🏠</span>Home</div>
+            <div class="phone-nav-item"><span class="phone-nav-icon">🔍</span>Discover</div>
+            <div class="phone-nav-item"><span class="phone-nav-plus">+</span></div>
+            <div class="phone-nav-item"><span class="phone-nav-icon">💬</span>DMs</div>
+            <div class="phone-nav-item"><span class="phone-nav-icon">👤</span>Me</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div><div class="stat-num">$97B</div><div class="stat-label">Adult content market by 2031</div></div>
+    <div><div class="stat-num">370M</div><div class="stat-label">OnlyFans registered users</div></div>
+    <div><div class="stat-num">0.5%</div><div class="stat-label">Payment processing fee</div></div>
+    <div><div class="stat-num">750</div><div class="stat-label">Founders Passes total</div></div>
+  </div>
+</div>
+
+<!-- AI SECTION -->
+<section class="ai-section" id="ai">
+  <div class="ai-grid">
+    <div class="ai-visual">
+      <img src="solo.jpg" alt="">
+      <div class="mask-tag">🎭 AI FACE — NOT HER REAL IDENTITY</div>
+    </div>
+    <div class="ai-text">
+      <div class="label">Core Technology</div>
+      <h2>HER FACE?<br>COMPLETELY<br>AI-GENERATED.</h2>
+      <p>The woman you see doesn't exist. Our AI replaces the creator's real face in real-time — preserving expressions, lip sync, and natural movement at 30fps.</p>
+      <ul class="ai-features">
+        <li>Works in live streams with zero noticeable lag</li>
+        <li>Choose from AI personas or create a custom face</li>
+        <li>Also works on uploaded videos (post-production)</li>
+        <li>Your real face never touches our servers</li>
+        <li>Undetectable by viewers — it just looks natural</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TIERS -->
+<section class="tiers-section" id="tiers">
+  <div class="tiers-inner">
+    <div class="label">Founders Pass NFT</div>
+    <h2>750 PASSES. THEN IT'S OVER.</h2>
+    <p class="sub">Founding members get permanent benefits. Mint with ETH, USDT, or credit card.</p>
+    <div class="tiers-grid">
+      <div class="tier">
+        <div class="tier-name bronze">EXPLORER</div>
+        <div class="tier-eth">0.05 ETH</div>
+        <div class="tier-usd">~$150 · Card accepted</div>
+        <div class="tier-supply">500 available</div>
+        <ul class="tier-list">
+          <li><span class="y">✓</span> 6 months premium access</li>
+          <li><span class="y">✓</span> Explorer badge</li>
+          <li><span class="y">✓</span> Early feature access</li>
+          <li><span class="n">—</span> All-creator content</li>
+          <li><span class="n">—</span> Founders Discord</li>
+          <li><span class="n">—</span> Product voting</li>
+        </ul>
+        <button class="tier-btn tier-btn-outline">Join Waitlist</button>
+      </div>
+      <div class="tier pop">
+        <div class="tier-name silver">CREATOR</div>
+        <div class="tier-eth">0.15 ETH</div>
+        <div class="tier-usd">~$450 · Card accepted</div>
+        <div class="tier-supply">200 available</div>
+        <ul class="tier-list">
+          <li><span class="y">✓</span> 12 months premium access</li>
+          <li><span class="y">✓</span> Creator badge</li>
+          <li><span class="y">✓</span> Early feature access</li>
+          <li><span class="y">✓</span> 3mo all-creator content</li>
+          <li><span class="y">✓</span> Founders Discord</li>
+          <li><span class="n">—</span> Product voting</li>
+        </ul>
+        <button class="tier-btn tier-btn-fill">Join Waitlist</button>
+      </div>
+      <div class="tier">
+        <div class="tier-name gold">FOUNDERS</div>
+        <div class="tier-eth">0.5 ETH</div>
+        <div class="tier-usd">~$1,500 · Card accepted</div>
+        <div class="tier-supply">50 available</div>
+        <ul class="tier-list">
+          <li><span class="y">✓</span> Lifetime premium access</li>
+          <li><span class="y">✓</span> Gold Founders badge</li>
+          <li><span class="y">✓</span> Early feature access</li>
+          <li><span class="y">✓</span> 12mo all-creator content</li>
+          <li><span class="y">✓</span> Founders Discord</li>
+          <li><span class="y">✓</span> Product voting</li>
+        </ul>
+        <button class="tier-btn tier-btn-fill">Join Waitlist</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section class="wl-section" id="waitlist">
+  <div class="wl-inner">
+    <h2>GET EARLY ACCESS.</h2>
+    <p>Waitlist members mint 24 hours before public sale. Drop your email — we notify you when it's live.</p>
+    <div class="wl-form">
+      <input type="email" placeholder="your@email.com" id="emailInput">
+      <button onclick="handleWL()">Join</button>
+    </div>
+    <p class="wl-count"><span id="cnt">847</span> people on the waitlist</p>
+  </div>
+</section>
+
+<footer>
+  <div class="fl">MASQ</div>
+  <div class="links"><a href="#">Twitter / X</a><a href="#">Discord</a><a href="#">Docs</a><a href="#">Terms</a></div>
+  <p class="copy">&copy; 2026 MASQ. Founders Pass is a platform access token, not a security or investment product. 18+ only.</p>
+</footer>
+
+<script>
+function handleWL() {
+  var e = document.getElementById('emailInput');
+  if (e.value && e.value.includes('@')) {
+    var b = document.querySelector('.wl-form button');
+    b.textContent = "You're in!";
+    b.style.background = 'linear-gradient(135deg,#00C853,#00BFA5)';
+    document.getElementById('cnt').textContent = parseInt(document.getElementById('cnt').textContent) + 1;
+  }
+}
+var c = 0, t = 847;
+var ci = setInterval(function() {
+  c += Math.ceil(t / 40);
+  if (c >= t) { c = t; clearInterval(ci); }
+  document.getElementById('cnt').textContent = c;
+}, 25);
+
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(x) {
+    if (x.isIntersecting) { x.target.style.opacity = '1'; x.target.style.transform = 'translateY(0)'; }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.tier,.ai-text,.ai-visual,.stat-num').forEach(function(el) {
+  el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = 'all 0.6s ease'; obs.observe(el);
+});
+</script>
+</body>
+</html>
